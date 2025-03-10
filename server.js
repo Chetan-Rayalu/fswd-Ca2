@@ -41,5 +41,5 @@ router.get('/data', (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Server Running at http://localhost:${port}`);
+    console.log(`Server Running at http://localhost:${PORT}`);
 });
