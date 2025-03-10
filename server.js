@@ -1,7 +1,9 @@
 const express = require('express');
-const port = 5000;
 const app = express();
 const router = express.Router();
+app.use(express.json());
+app.use('/', router);
+const PORT = 5000;
 
 const Users = [
     { Username: "MS Dhoni", age: 42, email: "thala07@gmail.com" },
@@ -9,11 +11,6 @@ const Users = [
    
 ];
 
-// <!-- Kindly Change the usernames and emails according to your requirements -->
-
-
-app.use(express.json());
-app.use('/', router);
 
 
 router.get('/', (req, res) => {
@@ -26,23 +23,23 @@ router.get('/data', (req, res) => {
 
 
         if (!Username || Username.trim() === '') {
-            return res.status(400).json({ message: "Username cannot be empty!" });
+            return res.status(400).json({ message: "Username cannot be empty" });
         }
 
         const user = Users.find(user => user.Username === Username);
         
         if (!user) {
-            return res.status(404).json({ message: "User Details Not Found" });
+            return res.status(404).json({ message: "User details not found" });
         }
 
-        res.status(200).json({ message: "User Details found", data: user });
+        res.status(200).json({ message: "User details found", data: user });
     } catch (error) {
-        console.error("Error occurred in /find route:", error);
+        console.error("Error:", error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
 
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server Running at http://localhost:${port}`);
 });
